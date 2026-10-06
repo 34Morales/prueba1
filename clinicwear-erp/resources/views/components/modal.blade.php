@@ -17,6 +17,23 @@ $maxWidth = [
 <div
     x-data="{
         show: @js($show),
+        previousFocus: null,
+        inertElements: [],
+        setBackgroundInert(value) {
+            if (!value) {
+                this.inertElements.forEach(([element, original]) => element.inert = original);
+                this.inertElements = [];
+                return;
+            }
+            let node = $el;
+            while (node.parentElement && node !== document.body) {
+                [...node.parentElement.children].filter(sibling => sibling !== node).forEach(sibling => {
+                    this.inertElements.push([sibling, sibling.inert]);
+                    sibling.inert = true;
+                });
+                node = node.parentElement;
+            }
+        },
         focusables() {
             // All focusable element types...
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
@@ -33,12 +50,16 @@ $maxWidth = [
     }"
     x-init="$watch('show', value => {
         if (value) {
+            previousFocus = document.activeElement;
+            setBackgroundInert(true);
             document.body.classList.add('overflow-y-hidden');
             {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
         } else {
             document.body.classList.remove('overflow-y-hidden');
+            setBackgroundInert(false);
+            previousFocus?.focus();
         }
-    })"
+    }); if (show) { setBackgroundInert(true); document.body.classList.add('overflow-y-hidden'); $nextTick(() => firstFocusable()?.focus()); }"
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
     x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
     x-on:close.stop="show = false"
@@ -60,12 +81,15 @@ $maxWidth = [
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
     >
-        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <div class="absolute inset-0 ui-modal-backdrop"></div>
     </div>
 
     <div
         x-show="show"
-        class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        class="mb-6 ui-modal-panel overflow-hidden transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="{{ $name }}-title"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"

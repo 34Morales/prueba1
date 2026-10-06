@@ -1,45 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrubs Collection | ClinicWear</title>
-    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
-</head>
-<body>
-
-<header class="top-header">
-    <div class="brand">
-        <img src="{{ asset('images/logo.png') }}" alt="ClinicWear Logo">
-        <div>
-            <h1>ClinicWear</h1>
-            <h2>Scrubs</h2>
-        </div>
-    </div>
-
-    <div class="search-box">
-        <input type="text" placeholder="Search scrubs...">
-        <button>⌕</button>
-    </div>
-
-    <div class="header-actions">
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        <span>My Account</span>
-        <span>Cart <b>0</b></span>
-    </div>
-</header>
-
-<nav class="navbar">
-    <a href="{{ route('store.home') }}">Home</a>
-    <a href="{{ route('store.women') }}">Women</a>
-    <a href="{{ route('store.men') }}">Men</a>
-    <a href="{{ route('store.scrubs') }}" class="active">Scrubs</a>
-    <a href="{{ route('store.lab-coats') }}">Lab Coats</a>
-    <a href="{{ route('store.accessories') }}">Accessories</a>
-    <a href="{{ route('store.offers') }}">Offers</a>
-    <a href="{{ route('store.contact') }}">Contact</a>
-</nav>
-
+@extends('layouts.store')
+@section('title', 'Scrubs Collection | ClinicWear')
+@section('content')
 <section class="collection-hero">
     <div class="collection-content">
 
@@ -55,14 +16,12 @@
             engineered for comfort, flexibility and durability.
         </p>
 
-        <button class="primary-btn">
-            Browse Collection
-        </button>
+        <a class="primary-btn" href="#products">Browse Collection</a>
 
     </div>
 
     <div class="collection-image">
-        <img src="{{ asset('images/scrubs-banner.png') }}" alt="">
+        <img src="{{ asset('images/apparel.svg') }}" alt="">
     </div>
 </section>
 
@@ -95,11 +54,11 @@
 
 </section>
 
-<section class="products-grid">
+<section class="products-grid" id="products" aria-label="Products">
 
     <div class="product-card">
         <span class="badge">Premium</span>
-        <img src="{{ asset('images/scrub1.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
         <h3>Premium Scrub Set</h3>
         <p>Top + Pants</p>
         <div class="price">$79.99</div>
@@ -108,7 +67,7 @@
 
     <div class="product-card">
         <span class="badge">Best Seller</span>
-        <img src="{{ asset('images/scrub2.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
         <h3>Flex Stretch Collection</h3>
         <p>Ultra Comfort</p>
         <div class="price">$84.99</div>
@@ -117,7 +76,7 @@
 
     <div class="product-card">
         <span class="badge">New</span>
-        <img src="{{ asset('images/scrub3.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
         <h3>Performance Scrub</h3>
         <p>Professional Fit</p>
         <div class="price">$89.99</div>
@@ -126,7 +85,7 @@
 
     <div class="product-card">
         <span class="badge">Exclusive</span>
-        <img src="{{ asset('images/scrub4.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
         <h3>Elite Medical Collection</h3>
         <p>Limited Edition</p>
         <div class="price">$99.99</div>
@@ -134,16 +93,4 @@
     </div>
 
 </section>
-
-<script>
-function toggleTheme() {
-    const html = document.documentElement;
-    html.dataset.theme =
-        html.dataset.theme === 'dark'
-        ? 'light'
-        : 'dark';
-}
-</script>
-
-</body>
-</html>
+@endsection

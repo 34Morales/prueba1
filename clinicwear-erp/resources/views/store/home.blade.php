@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClinicWear Scrubs</title>
-    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
-</head>
-<body>
-
-<header class="top-header">
-    <div class="brand">
-        <img src="{{ asset('images/logo.png') }}" alt="ClinicWear Logo">
-        <div>
-            <h1>ClinicWear</h1>
-            <h2>Scrubs</h2>
-        </div>
-    </div>
-
-    <div class="search-box">
-        <input type="text" placeholder="Search products...">
-        <button>⌕</button>
-    </div>
-
-    <div class="header-actions">
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        <span>My Account</span>
-        <span>Cart <b>0</b></span>
-    </div>
-</header>
-
-<nav class="navbar">
-    <a href="{{ route('store.home') }}" class="{{ request()->routeIs('store.home') ? 'active' : '' }}">Home</a>
-    <a href="{{ route('store.women') }}" class="{{ request()->routeIs('store.women') ? 'active' : '' }}">Women</a>
-    <a href="{{ route('store.men') }}" class="{{ request()->routeIs('store.men') ? 'active' : '' }}">Men</a>
-    <a href="{{ route('store.scrubs') }}" class="{{ request()->routeIs('store.scrubs') ? 'active' : '' }}">Scrubs</a>
-    <a href="{{ route('store.lab-coats') }}" class="{{ request()->routeIs('store.lab-coats') ? 'active' : '' }}">Lab Coats</a>
-    <a href="{{ route('store.accessories') }}" class="{{ request()->routeIs('store.accessories') ? 'active' : '' }}">Accessories</a>
-    <a href="{{ route('store.offers') }}" class="{{ request()->routeIs('store.offers') ? 'active' : '' }}">Offers</a>
-    <a href="{{ route('store.contact') }}" class="{{ request()->routeIs('store.contact') ? 'active' : '' }}">Contact</a>
-</nav>
-
-<main class="container">
+@extends('layouts.store')
+@section('title', 'ClinicWear Scrubs')
+@section('content')
+<div class="container">
 
     <section class="hero">
         <div class="hero-content">
@@ -49,20 +10,20 @@
             <p>High-quality, elegant and functional scrubs designed for medical professionals who need comfort, style and durability.</p>
 
             <div class="hero-buttons">
-                <button class="primary-btn">Shop Now →</button>
-                <button class="secondary-btn">View Collection</button>
+                <a class="primary-btn" href="{{ route('store.scrubs') }}">Shop Now â†’</a>
+                <a class="secondary-btn" href="#collections">View collection</a>
             </div>
 
             <div class="hero-features">
-                <div><b>Premium Fabric</b><small>Soft, durable and breathable</small></div>
-                <div><b>Modern Design</b><small>Professional style</small></div>
-                <div><b>Easy Care</b><small>No shrinking, no fading</small></div>
+                <div><x-icon name="shield" /><b>Premium Fabric</b><small>Soft, durable and breathable</small></div>
+                <div><x-icon name="user" /><b>Modern Design</b><small>Professional style</small></div>
+                <div><x-icon name="check" /><b>Easy Care</b><small>No shrinking, no fading</small></div>
             </div>
         </div>
 
         <div class="hero-image">
             <div class="glow"></div>
-            <img src="{{ asset('images/scrubs-hero.png') }}" alt="Scrubs">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Scrubs">
         </div>
     </section>
 
@@ -73,53 +34,44 @@
         <div><b>Guaranteed Quality</b><span>Premium medical apparel</span></div>
     </section>
 
-    <section class="categories">
+    <section class="categories" id="collections" aria-label="Collections">
         <div class="category-info">
             <span>Collections</span>
             <h3>Shop by Category</h3>
             <p>Explore our professional medical apparel collections.</p>
-            <button>View All →</button>
+            <a class="primary-btn" href="{{ route('store.scrubs') }}">Explore all</a>
         </div>
 
         <div class="category-card">
-            <img src="{{ asset('images/women.png') }}">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
             <h4>Women</h4>
-            <a href="#">View products →</a>
+            <a href="{{ route('store.women') }}">View products â†’</a>
         </div>
 
         <div class="category-card">
-            <img src="{{ asset('images/men.png') }}">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
             <h4>Men</h4>
-            <a href="#">View products →</a>
+            <a href="{{ route('store.men') }}">View products â†’</a>
         </div>
 
         <div class="category-card">
-            <img src="{{ asset('images/scrubs.png') }}">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
             <h4>Scrubs</h4>
-            <a href="#">View products →</a>
+            <a href="{{ route('store.scrubs') }}">View products â†’</a>
         </div>
 
         <div class="category-card">
-            <img src="{{ asset('images/lab-coats.png') }}">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
             <h4>Lab Coats</h4>
-            <a href="#">View products →</a>
+            <a href="{{ route('store.lab-coats') }}">View products â†’</a>
         </div>
 
         <div class="category-card">
-            <img src="{{ asset('images/accessories.png') }}">
+            <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
             <h4>Accessories</h4>
-            <a href="#">View products →</a>
+            <a href="{{ route('store.accessories') }}">View products â†’</a>
         </div>
     </section>
 
-</main>
-
-<script>
-    function toggleTheme() {
-        const html = document.documentElement;
-        html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    }
-</script>
-
-</body>
-</html>
+</div>
+@endsection

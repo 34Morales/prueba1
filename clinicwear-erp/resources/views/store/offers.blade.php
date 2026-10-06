@@ -1,45 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offers | ClinicWear</title>
-    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
-</head>
-<body>
-
-<header class="top-header">
-    <div class="brand">
-        <img src="{{ asset('images/logo.png') }}" alt="ClinicWear Logo">
-        <div>
-            <h1>ClinicWear</h1>
-            <h2>Scrubs</h2>
-        </div>
-    </div>
-
-    <div class="search-box">
-        <input type="text" placeholder="Search offers...">
-        <button>⌕</button>
-    </div>
-
-    <div class="header-actions">
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        <span>My Account</span>
-        <span>Cart <b>0</b></span>
-    </div>
-</header>
-
-<nav class="navbar">
-    <a href="{{ route('store.home') }}">Home</a>
-    <a href="{{ route('store.women') }}">Women</a>
-    <a href="{{ route('store.men') }}">Men</a>
-    <a href="{{ route('store.scrubs') }}">Scrubs</a>
-    <a href="{{ route('store.lab-coats') }}">Lab Coats</a>
-    <a href="{{ route('store.accessories') }}">Accessories</a>
-    <a href="{{ route('store.offers') }}" class="active">Offers</a>
-    <a href="{{ route('store.contact') }}">Contact</a>
-</nav>
-
+@extends('layouts.store')
+@section('title', 'Offers | ClinicWear')
+@section('content')
 <section class="collection-hero">
 
     <div class="collection-content">
@@ -56,25 +17,23 @@
             and special offers available for a limited time.
         </p>
 
-        <button class="primary-btn">
-            Shop Deals
-        </button>
+        <a class="primary-btn" href="#products">Shop Deals</a>
 
     </div>
 
     <div class="collection-image">
-        <img src="{{ asset('images/offers-banner.png') }}" alt="">
+        <img src="{{ asset('images/apparel.svg') }}" alt="">
     </div>
 
 </section>
 
-<section class="products-grid">
+<section class="products-grid" id="products" aria-label="Products">
 
     <div class="product-card">
 
         <span class="badge">40% OFF</span>
 
-        <img src="{{ asset('images/offer1.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
 
         <h3>Premium Women's Scrub</h3>
 
@@ -94,7 +53,7 @@
 
         <span class="badge">30% OFF</span>
 
-        <img src="{{ asset('images/offer2.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
 
         <h3>Men's Performance Scrub</h3>
 
@@ -114,7 +73,7 @@
 
         <span class="badge">25% OFF</span>
 
-        <img src="{{ asset('images/offer3.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
 
         <h3>Premium Lab Coat</h3>
 
@@ -134,7 +93,7 @@
 
         <span class="badge">Bundle</span>
 
-        <img src="{{ asset('images/offer4.png') }}">
+        <img src="{{ asset('images/apparel.svg') }}" alt="Medical apparel illustration">
 
         <h3>Scrub Set + Cap</h3>
 
@@ -175,16 +134,4 @@
     </div>
 
 </section>
-
-<script>
-function toggleTheme() {
-    const html = document.documentElement;
-    html.dataset.theme =
-        html.dataset.theme === 'dark'
-        ? 'light'
-        : 'dark';
-}
-</script>
-
-</body>
-</html>
+@endsection
